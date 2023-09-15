@@ -30,8 +30,8 @@ func main(args: [String]) -> Int32 {
             }
         }
         return 0
-    }else if CommandLine.arguments.count == 6 {
-        let (language, fastmode, languageCorrection, src, dst) = (args[1], args[2],args[3],args[4],args[5])
+    }else if CommandLine.arguments.count > 2 {
+        let (language, fastmode, languageCorrection, src) = (args[1], args[2],args[3],args[4])
         let substrings = language.split(separator: ",")
         var languages:[String] = []
         for substring in substrings {
@@ -97,10 +97,12 @@ func main(args: [String]) -> Int32 {
             }
             dict["lines"] = lines
             dict["text"] = allText
-            let data = try? JSONSerialization.data(withJSONObject: dict, options: [])
-            let jsonString = String(data: data!,
-                                    encoding: .utf8) ?? "[]"
-            try? jsonString.write(to: URL(fileURLWithPath: dst), atomically: true, encoding: String.Encoding.utf8)
+//            let data = try? JSONSerialization.data(withJSONObject: dict, options: [])
+//            let jsonString = String(data: data!,
+//                                    encoding: .utf8) ?? "[]"
+            print(allText)
+//            try? allText.write(to: URL(fileURLWithPath: dst), atomically: true, encoding: String.Encoding.utf8)
+//            try? jsonString.write(to: URL(fileURLWithPath: dst), atomically: true, encoding: String.Encoding.utf8)
         }
         request.recognitionLevel = MODE
         request.usesLanguageCorrection = USE_LANG_CORRECTION
